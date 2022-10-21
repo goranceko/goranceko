@@ -10,7 +10,8 @@ I’m currently working on **Payoneer Merchant Services**. 💬 Ask me about: Ja
 
 <!-- <div id="header">
   <img src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="100"/>
-</div> -->
+</div> 
+-->
 
 ### :hammer_and_wrench: Languages and Tools :
 
@@ -19,3 +20,9 @@ I’m currently working on **Payoneer Merchant Services**. 💬 Ask me about: Ja
 ### :fire: My Stats :
 
 [![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=goranceko&theme=dark&background=000000)](https://git.io/streak-stats)
+
+<!-- 
+  <a href="https://github.com/goranceko">
+    <img height="180em" src="https://github-readme-stats.vercel.app/api?username=goranceko&theme=noctis_minimus&show_icons=true" />
+  </a>
+-->
