@@ -1,13 +1,16 @@
-<h3>Hi 👋, I'm Goran</h3>
-<hr />
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&text=Hello!&height=100&section=header"/>
+</p>
 
-<div id="header">
+<p align="center">
+🔭 Hi 👋, I'm Goran! A passionate software engineer <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> from Serbia. 
+<p/>
+
+I’m currently working on **Payoneer Merchant Services**. 💬 Ask me about: Java, microservices, Kafka, databases, software design. 
+
+<!-- <div id="header">
   <img src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="100"/>
-</div>
-
-🔭 A passionate software engineer <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> from Serbia. I’m currently working on **Payoneer Merchant Services**. 
-
-💬 Ask me about: Java, microservices, Kafka, databases, software design. 
+</div> -->
 
 ### :hammer_and_wrench: Languages and Tools :
 
