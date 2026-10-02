@@ -131,7 +131,7 @@ def build_header():
     lines = ["senior product engineer · based in Serbia", "Java, microservices, Kafka, databases, software design",
              "building observability at "]
     text = bar_left + bar_right + name + "$ whoami>>" + "".join(lines) + "DASH0"
-    h = 320
+    h = 280
     css = f"""@keyframes type{{from{{width:0}}}}
 @keyframes flicker{{0%{{opacity:0}}10%{{opacity:1}}14%{{opacity:.2}}22%{{opacity:1}}30%{{opacity:.4}}40%,100%{{opacity:1}}}}
 @keyframes gm{{0%,92%,100%{{transform:translate(0,0)}}93%{{transform:translate(5px,-1px)}}95%{{transform:translate(-3px,1px)}}97%{{transform:translate(2px,0)}}}}
@@ -142,30 +142,30 @@ def build_header():
     defs = f"""<pattern id="scan" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#000" fill-opacity=".2"/></pattern>
 <filter id="tglow" x="-5%" y="-40%" width="110%" height="180%"><feGaussianBlur stdDeviation="9"/></filter>
 <filter id="sglow" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>
-<clipPath id="typeclip"><rect class="typing" x="{X}" y="80" width="140" height="30"/></clipPath>"""
+<clipPath id="typeclip"><rect class="typing" x="{X}" y="48" width="140" height="30"/></clipPath>"""
     dotx = FR - 20 - len(bar_right) * 8.2 - 16
     rows = [f'<text class="fg" x="{X}" y="{{y}}"><tspan class="cy">&gt;&gt;</tspan> {e(lines[0])}</text>',
             f'<text class="fg" x="{X}" y="{{y}}"><tspan class="cy">&gt;&gt;</tspan> {e(lines[1])}</text>',
             f'<text class="fg" x="{X}" y="{{y}}"><tspan class="cy">&gt;&gt;</tspan> {e(lines[2])}<tspan class="cy" font-weight="700">DASH0</tspan></text>']
-    desc_lines, _ = stagger(rows, 218, 24, delay0=1.75, step=0.25)
+    desc_lines, _ = stagger(rows, 186, 24, delay0=1.75, step=0.25)
     body = f'''<rect x="{FL}" y="{M}" width="{FR-FL}" height="34" fill="{CYAN}" fill-opacity=".08"/>
 <line x1="{FL}" y1="{M+34}" x2="{FR}" y2="{M+34}" stroke="{CYAN}" stroke-opacity=".5"/>
 <text x="{FL+16}" y="{M+22}" letter-spacing="1" class="cy" style="font-size:12px">{e(bar_left)}</text>
 <text x="{FR-20}" y="{M+22}" letter-spacing="1" class="dim" text-anchor="end" style="font-size:12px">{e(bar_right)}</text>
 <circle class="dot" cx="{dotx}" cy="{M+18}" r="4" fill="{GREEN}"/>
 <circle class="dot" cx="{dotx}" cy="{M+18}" r="4" fill="{GREEN}" filter="url(#sglow)"/>
-<g clip-path="url(#typeclip)"><text x="{X}" y="102" class="dim"><tspan class="gr">$</tspan> whoami</text></g>
+<g clip-path="url(#typeclip)"><text x="{X}" y="70" class="dim"><tspan class="gr">$</tspan> whoami</text></g>
 <g class="name" font-weight="800" letter-spacing="2" style="font-size:56px">
-<text x="{X}" y="172" fill="{CYAN}" opacity=".55" filter="url(#tglow)" style="font-size:56px">{name}</text>
-<g class="gm"><text x="{X+3}" y="172" fill="{MAGENTA}" opacity=".75" style="font-size:56px">{name}</text></g>
-<g class="gc"><text x="{X-3}" y="172" fill="{CYAN}" opacity=".85" style="font-size:56px">{name}</text></g>
-<text x="{X}" y="172" fill="#f0fbff" style="font-size:56px">{name}</text>
+<text x="{X}" y="140" fill="{CYAN}" opacity=".55" filter="url(#tglow)" style="font-size:56px">{name}</text>
+<g class="gm"><text x="{X+3}" y="140" fill="{MAGENTA}" opacity=".75" style="font-size:56px">{name}</text></g>
+<g class="gc"><text x="{X-3}" y="140" fill="{CYAN}" opacity=".85" style="font-size:56px">{name}</text></g>
+<text x="{X}" y="140" fill="#f0fbff" style="font-size:56px">{name}</text>
 </g>
 {desc_lines}
 <g class="ln" style="animation-delay:2.8s">
-<text x="{X}" y="304" class="gr">$</text>
-<rect class="cursor" x="{X+18}" y="291" width="10" height="17" fill="{CYAN}"/>
-<rect class="cursor" x="{X+18}" y="291" width="10" height="17" fill="{CYAN}" filter="url(#sglow)"/>
+<text x="{X}" y="272" class="gr">$</text>
+<rect class="cursor" x="{X+18}" y="259" width="10" height="17" fill="{CYAN}"/>
+<rect class="cursor" x="{X+18}" y="259" width="10" height="17" fill="{CYAN}" filter="url(#sglow)"/>
 </g>
 <rect x="{FL}" y="{M+35}" width="{FR-FL}" height="{h-M-35}" fill="url(#scan)"/>'''
     return slice_svg(h, body, title="Goran Čeko",
