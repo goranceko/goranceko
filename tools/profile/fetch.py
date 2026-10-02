@@ -4,8 +4,6 @@
 Only reads GITHUB_TOKEN, the token GitHub Actions issues for this repository. It cannot see
 private repositories, so every number here is one anyone can already see on the public
 profile. Never feed it a personal access token: that would pull private work into a public repo.
-
-Adapted from https://github.com/georgekobaidze/georgekobaidze.
 """
 import datetime
 import json

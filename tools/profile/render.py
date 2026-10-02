@@ -1,7 +1,5 @@
 """Renders the profile README's SVG slices into assets/.
 
-Adapted from https://github.com/georgekobaidze/georgekobaidze.
-
 Every slice is part of one continuous console frame. Run fetch.py first to refresh
 data/*.json; this script only reads those files and draws.
 

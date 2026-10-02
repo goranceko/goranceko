@@ -1,7 +1,5 @@
 """Updates the alt text of the stats and contribution-city images in README.md from data/*.json,
 so screen readers get today's numbers. Everything else in the README is left exactly as it is.
-
-Adapted from https://github.com/georgekobaidze/georgekobaidze.
 """
 import datetime
 import html
