@@ -127,7 +127,7 @@ def up40(v):
 def build_header():
     bar_left, bar_right = "SYS://GORANCEKO // NODE:SERBIA", "ONLINE · ALL SYSTEMS NOMINAL"
     name = "GORAN CEKO"   # the embedded font has no Č glyph
-    lines = ["product engineer · based in Serbia", "Java, microservices, Kafka, databases, software design",
+    lines = ["senior product engineer · based in Serbia", "Java, microservices, Kafka, databases, software design",
              "building observability at "]
     text = bar_left + bar_right + name + "$ whoami>>" + "".join(lines) + "DASH0"
     h = 360
@@ -168,7 +168,7 @@ def build_header():
 </g>
 <rect x="{FL}" y="{M+35}" width="{FR-FL}" height="{h-M-35}" fill="url(#scan)"/>'''
     return slice_svg(h, body, title="Goran Čeko",
-                     desc="Product engineer based in Serbia. Java, microservices, Kafka, databases, software design. "
+                     desc="Senior product engineer based in Serbia. Java, microservices, Kafka, databases, software design. "
                           "Building observability at Dash0.",
                      text=text, top=True, css=css, defs=defs, weights=(400, 700, 800))
 

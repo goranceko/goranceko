@@ -1,5 +1,5 @@
 <p align="center">
-<img src="./assets/header.svg" width="100%" align="top" alt="Goran Čeko — product engineer based in Serbia. Java, microservices, Kafka, databases, software design. Building observability at Dash0.">
+<img src="./assets/header.svg" width="100%" align="top" alt="Goran Čeko — senior product engineer based in Serbia. Java, microservices, Kafka, databases, software design. Building observability at Dash0.">
 <img src="./assets/stats.svg" width="100%" align="top" alt="Stats: 0 total stars; 971 contributions in 2026, 6333 all time; 10 pull requests (7 merged); current streak 5 days, longest 12 days; 10 followers; 0 forks; member since May 2012; 15 public repos. Top languages: Java, JavaScript, CSS, Go, HTML.">
 <img src="./assets/contribution-city.svg" width="100%" align="top" alt="Contribution city: an isometric night skyline with one building per day of the last year. 1,053 contributions, busiest day September 24 with 60.">
 <img src="./assets/projects.svg" width="100%" align="top" alt="Projects">
