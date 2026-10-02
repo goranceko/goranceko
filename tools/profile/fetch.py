@@ -122,7 +122,8 @@ def fetch_github(token, today):
     calendar = [[d.isoformat(), days.get(d, 0)] for d in
                 (start + datetime.timedelta(days=i) for i in range((today - start).days + 1))]
 
-    repos = u["repositories"]["nodes"]
+    # the profile repo holds this generator's own Python, which would top the language chart
+    repos = [r for r in u["repositories"]["nodes"] if r["name"] != USER]
     langs = {}
     for r in repos:
         for edge in r["languages"]["edges"]:

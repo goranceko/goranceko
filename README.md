@@ -8,5 +8,3 @@
 <img src="./assets/stack.svg" width="100%" align="top" alt="Tech stack. Languages: Java, Go, SQL. Frameworks: Spring Boot. Data: Kafka, PostgreSQL, MySQL, Elasticsearch. Infra: Docker, Kubernetes, GCP, Linux, Git.">
 <img src="./assets/footer.svg" width="100%" align="top" alt="Connection closed.">
 </p>
-
-<sub>Console design adapted from <a href="https://github.com/georgekobaidze/georgekobaidze">georgekobaidze</a>.</sub>
