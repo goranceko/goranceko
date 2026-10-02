@@ -265,12 +265,12 @@ def build_card(p, side, delay, stars=None):
 <text x="{tx+8}" y="{y0+59}" letter-spacing="1" fill="{p["tagc"]}" style="font-size:11px">{e(p["tag"])}</text>
 {desc}
 <text x="{tx}" y="{y0+158}" class="dim" style="font-size:12px">{e(p["stack"])}</text>
-{star}
-<text x="{sx}" y="{y0+158}" text-anchor="end" class="dim" style="font-size:12px">{p["stars"]}</text>
+{star if p["stars"] else ""}
+{f'<text x="{sx}" y="{y0+158}" text-anchor="end" class="dim" style="font-size:12px">{p["stars"]}</text>' if p["stars"] else ""}
 </g>'''
     text = p["name"] + p["tag"] + p["desc"] + p["stack"] + str(p["stars"])
     return half_slice(CARD_H, side, body, title=p["name"],
-                      desc=f'{p["name"]}: {p["desc"]} Built with {p["stack"].replace(" · ", ", ")}. {p["stars"]} stars.', text=text)
+                      desc=f'{p["name"]}: {p["desc"]} Built with {p["stack"].replace(" · ", ", ")}.' + (f' {p["stars"]} stars.' if p["stars"] else ''), text=text)
 
 
 
@@ -303,7 +303,9 @@ def build_stats(d):
     parts.append(f'<g class="ln" style="animation-delay:.15s"><text x="{X}" y="96" class="dim"><tspan class="gr">$</tspan> gh stats --user goranceko</text></g>')
     # row 1 — big tiles
     tw, gap, ty, th = 182, 16, 118, 92
-    t1 = [("TOTAL STARS", fmt(d["stars"]), f"across {d.get('repo_count', 'all')} repos" if d.get("repo_count") else "across all repos"),
+    first = (("TOTAL STARS", fmt(d["stars"]), f"across {d['repo_count']} repos") if d["stars"]
+             else ("ACTIVE DAYS", fmt(d["active_days"]), "last 365 days"))
+    t1 = [first,
           (f"CONTRIBUTIONS {d['year']}", fmt(d["contributions_year"]), f"{fmt(d['contributions_all'])} all time")
           if "contributions_year" in d else   # older data files only have commit counts
           (f"COMMITS {d['year']}", fmt(d["commits_year"]), f"{fmt(d['commits_all'])} all time"),
@@ -314,7 +316,8 @@ def build_stats(d):
     # row 2 — neofetch list + languages
     ry, rh = ty + th + 16, 150
     lw = 300
-    kv = [("followers", fmt(d["followers"])), ("forks", fmt(d["forks"])),
+    top_lang = next(iter(sorted(d["languages"].items(), key=lambda kv: -kv[1])), ("—", 0))[0]
+    kv = [("followers", fmt(d["followers"])), ("forks", fmt(d["forks"])) if d["forks"] else ("top language", top_lang),
           ("member since", f"{since:%b %Y} ({yrs}y)"), ("public repos", fmt(d["repo_count"]))]
     rows = "\n".join(
         f'<text x="{X+16}" y="{ry+38+i*28}" xml:space="preserve"><tspan class="cy">{e(k)}</tspan><tspan class="dim">{"." * (16 - len(k))}</tspan> <tspan class="fg">{e(v)}</tspan></text>'
@@ -362,9 +365,10 @@ def build_stats(d):
     text = re.sub(r"<[^>]+>", "", text) + "0123456789,—%.★()d"
     activity = (f"{d['contributions_year']} contributions in {d['year']}, {d['contributions_all']} all time"
                 if "contributions_year" in d else f"{d['commits_year']} commits in {d['year']}, {d['commits_all']} all time")
-    desc = (f"GitHub stats: {d['stars']} total stars; {activity}; "
+    lead = f"{d['stars']} total stars" if d["stars"] else f"{d['active_days']} active days in the last year"
+    desc = (f"GitHub stats: {lead}; {activity}; "
             f"{d['prs']} pull requests ({d['prs_merged']} merged); current streak {d['streak_current']} days, longest {d['streak_longest']}; "
-            f"{d['followers']} followers; {d['forks']} forks; member since {since:%B %Y}; {d['repo_count']} public repos. "
+            f"{d['followers']} followers; " + (f"{d['forks']} forks; " if d["forks"] else "") + f"member since {since:%B %Y}; {d['repo_count']} public repos. "
             "Top languages: " + ", ".join(f"{k} {p*100:.1f}%" for k, p in items) + ".")
     return slice_svg(h, "\n".join(parts), title="Stats", desc=desc, text=html.unescape(text))
 
@@ -551,6 +555,8 @@ def main():
     OUT = args.out
     stats = json.load(open(args.data / "stats.json"))
     stars = stats.get("repo_stars", {})
+    calendar = json.load(open(args.data / "calendar.json")) if (args.data / "calendar.json").exists() else []
+    stats["active_days"] = sum(1 for _, n in calendar if n)
     write("header.svg", build_header())
     write("stats.svg", build_stats(stats))
     if (args.data / "calendar.json").exists():

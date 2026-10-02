@@ -22,11 +22,12 @@ def days(n):
 def stats_alt(d):
     since = datetime.date.fromisoformat(d["created_at"][:10])
     langs = sorted(d["languages"].items(), key=lambda kv: -kv[1])[:5]
-    parts = [f'{d["stars"]} total stars',
+    active = sum(1 for _, n in json.loads((DATA / "calendar.json").read_text()) if n) if (DATA / "calendar.json").exists() else 0
+    parts = [f'{d["stars"]} total stars' if d["stars"] else f'{active} active days in the last year',
              f'{d["contributions_year"]} contributions in {d["year"]}, {d["contributions_all"]} all time',
              f'{d["prs"]} pull requests ({d["prs_merged"]} merged)',
              f'current streak {days(d["streak_current"])}, longest {days(d["streak_longest"])}',
-             f'{d["followers"]} followers', f'{d["forks"]} forks',
+             f'{d["followers"]} followers'] + ([f'{d["forks"]} forks'] if d["forks"] else []) + [
              f'member since {since:%B %Y}', f'{d["repo_count"]} public repos']
     text = "Stats: " + "; ".join(parts) + ". Top languages: " + ", ".join(k for k, _ in langs) + "."
     return html.escape(text, quote=True)
