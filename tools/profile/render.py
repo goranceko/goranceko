@@ -31,11 +31,14 @@ def visible(markup):
     return html.unescape(re.sub(r"<[^>]+>", "", markup))
 
 
+WEIGHTS = {400: "Regular", 700: "Bold", 800: "ExtraBold"}
+
+
 def faces(text, weights=(400, 700)):
     text += "0123456789"
     out = []
     for w in weights:
-        f = TTFont(FONT_DIR / f"jetbrains-mono-latin-{w}-normal.woff2", recalcTimestamp=False)  # fixed timestamp keeps output byte-identical between runs
+        f = TTFont(FONT_DIR / f"JetBrainsMono-{WEIGHTS[w]}.ttf", recalcTimestamp=False)  # fixed timestamp keeps output byte-identical between runs
         o = subset.Options(); o.flavor = "woff2"; o.layout_features = []
         s = subset.Subsetter(o); s.populate(text=text); s.subset(f)
         b = io.BytesIO(); f.flavor = "woff2"; f.save(b)
@@ -126,11 +129,11 @@ def up40(v):
 # ─────────────────────────────── header ───────────────────────────────
 def build_header():
     bar_left, bar_right = "SYS://GORANCEKO // NODE:SERBIA", "ONLINE · ALL SYSTEMS NOMINAL"
-    name = "GORAN CEKO"   # the embedded font has no Č glyph
+    name = "GORAN ČEKO"
     lines = ["senior product engineer · based in Serbia", "Java, microservices, Kafka, databases, software design",
              "building observability at "]
     text = bar_left + bar_right + name + "$ whoami>>" + "".join(lines) + "DASH0"
-    h = 360
+    h = 320
     css = f"""@keyframes type{{from{{width:0}}}}
 @keyframes flicker{{0%{{opacity:0}}10%{{opacity:1}}14%{{opacity:.2}}22%{{opacity:1}}30%{{opacity:.4}}40%,100%{{opacity:1}}}}
 @keyframes gm{{0%,92%,100%{{transform:translate(0,0)}}93%{{transform:translate(5px,-1px)}}95%{{transform:translate(-3px,1px)}}97%{{transform:translate(2px,0)}}}}
@@ -352,9 +355,9 @@ def build_stats(d):
 {"".join(segs)}
 {"".join(legend)}
 </g>''')
-    fy = ry + rh + 30
+    fy = ry + rh + 20
     parts.append(f'<text x="{FR-36}" y="{fy}" text-anchor="end" fill="#484f58" style="font-size:11px">// last sync {d["updated"]}</text>')
-    h = up40(fy + 16)
+    h = up40(fy + 4)
     text = "".join(str(x) for x in ["~/stats// 01$ gh stats --user goranceko", "".join(p for p in parts)])
     text = re.sub(r"<[^>]+>", "", text) + "0123456789,—%.★()d"
     activity = (f"{d['contributions_year']} contributions in {d['year']}, {d['contributions_all']} all time"
