@@ -1,7 +1,9 @@
 """Updates the alt text of the stats and contribution-city images in README.md from data/*.json,
-so screen readers get today's numbers. Everything else in the README is left exactly as it is.
+so screen readers get today's numbers, and stamps each image URL with a content hash so browsers
+never show a stale cached SVG. Everything else in the README is left exactly as it is.
 """
 import datetime
+import hashlib
 import html
 import json
 import pathlib
@@ -9,7 +11,8 @@ import re
 import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
-README = HERE.parent.parent / "README.md"
+ROOT = HERE.parent.parent
+README = ROOT / "README.md"
 DATA = HERE / "data"
 
 
@@ -46,15 +49,22 @@ def main():
     stats = json.loads((DATA / "stats.json").read_text())
     s = README.read_text()
 
-    s, n = re.subn(r'(<img src="\./assets/stats\.svg"[^>]*?alt=")[^"]*(")',
+    s, n = re.subn(r'(<img src="\./assets/stats\.svg(?:\?v=[0-9a-f]+)?"[^>]*?alt=")[^"]*(")',
                    lambda m: m.group(1) + stats_alt(stats) + m.group(2), s)
     if n != 1:
         sys.exit("error: README needs exactly one stats.svg image with an alt attribute")
 
     cal_file = DATA / "calendar.json"
     if cal_file.exists():
-        s = re.sub(r'(<img src="\./assets/contribution-city\.svg"[^>]*?alt=")[^"]*(")',
+        s = re.sub(r'(<img src="\./assets/contribution-city\.svg(?:\?v=[0-9a-f]+)?"[^>]*?alt=")[^"]*(")',
                    lambda mm: mm.group(1) + city_alt(json.loads(cal_file.read_text())) + mm.group(2), s)
+
+    def stamp(m):
+        svg = ROOT / "assets" / m.group(1)
+        if not svg.exists():
+            return m.group(0)
+        return f'src="./assets/{m.group(1)}?v={hashlib.sha256(svg.read_bytes()).hexdigest()[:8]}"'
+    s = re.sub(r'src="\./assets/([^"?]+\.svg)(?:\?v=[0-9a-f]+)?"', stamp, s)
 
     README.write_text(s)
     print("README updated")
