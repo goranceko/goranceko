@@ -5,7 +5,7 @@
   "prs_merged": 7,
   "stars": 0,
   "forks": 0,
-  "repo_count": 15,
+  "repo_count": 16,
   "repo_stars": {
     "hazelcast": 0,
     "spring-boot-web-thymeleaf": 0,
@@ -21,23 +21,25 @@
     "hello-github-actions": 0,
     "springboot-metrics-and-tracing": 0,
     "skills-hello-github-actions": 0,
-    "advent-of-code-2025": 0
+    "advent-of-code-2025": 0,
+    "hammerhead-karoo-extensions": 0
   },
   "languages": {
+    "Kotlin": 30940,
+    "HTML": 27162,
     "Java": 18799,
     "JavaScript": 14365,
     "CSS": 11691,
     "Go": 8553,
-    "HTML": 4572,
     "Shell": 238,
     "Dockerfile": 150
   },
   "year": 2026,
-  "commits_year": 12,
-  "commits_all": 61,
-  "contributions_year": 1295,
-  "contributions_all": 6657,
-  "streak_current": 3,
+  "commits_year": 17,
+  "commits_all": 66,
+  "contributions_year": 1315,
+  "contributions_all": 6677,
+  "streak_current": 4,
   "streak_longest": 12,
-  "updated": "2026-11-11"
+  "updated": "2026-11-12"
 }
